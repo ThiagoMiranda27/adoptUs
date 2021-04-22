@@ -38,3 +38,8 @@ export const CreateAccountButtonText = styled.Text`
     font-family: 'RobotoSlab-Regular';
     margin-left: 16px;
 `;
+
+export const Logo = styled.Image`
+    height: 70px;
+    width: 100%;
+`

@@ -7,32 +7,7 @@ export const Container = styled.View`
     align-items: center;
     justify-content: center;
     padding: 0 30px ${Platform.OS == 'android' ? 150 : 40}px;
-`;
-
-export const Title = styled.Text`
-    font-size: 24px;
-    color: #f4ede8;
-    font-family: 'RobotoSlab-Medium';
-    margin: 64px 0 24px;
-`;
-
-export const BackButton = styled.TouchableOpacity`
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin-left: 10px;
-    background: #235cba;
-    padding: 16px 0 ${16 + getBottomSpace()}px;
-
-    align-items: center;
-    flex-direction: row;
-`;
-
-export const BackButtonText = styled.Text`
-    color: #fff;
-    font-size: 18px;
-    font-family: 'RobotoSlab-Regular';
-    margin-left: 140px;
+    width: 100%;
 `;
 
 export const HeaderContainer = styled.View`
@@ -54,4 +29,33 @@ export const TextHeader = styled.Text`
     color: #fff;
     font-size: 30px;
     font-weight: bold;
+`;
+
+export const PhotoBox = styled.TouchableOpacity`
+    height: 100px;
+    width: 100px;
+    border: 1px;
+    border-color: #fff;
+    margin-bottom: 40px;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const PhotoView = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+`;
+
+export const PhotoText = styled.Text`
+    color: #fff;
+    margin-left: 10px;
+    font-size: 16px;
+`;
+
+export const PickerView = styled.View`
+    background: #f2f5f9;
+    border-radius: 10px;
+    width: 100%;
+    height: 60px;
+    margin-bottom: 8px;
 `;

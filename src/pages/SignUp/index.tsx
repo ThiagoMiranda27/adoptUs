@@ -1,6 +1,9 @@
-import React from 'react';
+import React, {useRef, useCallback} from 'react';
 import {Image, View, KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+
+import {Form} from '@unform/mobile';
+import {FormHandles} from '@unform/core';
 
 import {useNavigation} from '@react-navigation/native';
 
@@ -12,11 +15,13 @@ import {Container, Title, BackToSignInButton, BackToSignInButtonText} from './st
 const SignUp: React.FC = () => {
     const navigation = useNavigation();
 
-    const Cadastrar = () => {
-        console.log('cadastrou');
-        if(true) //cadastrar no banco
-            navigation.navigate('SuccessSignUp')
-    }
+    const formRef = useRef<FormHandles>(null);
+
+    const handleSignUp = useCallback((data: object) => {
+        console.log(data);
+        //novo usuario
+        navigation.navigate('SuccessSignUp');
+    }, []);
 
     return(
         <>
@@ -35,13 +40,19 @@ const SignUp: React.FC = () => {
                             <Title>Crie sua conta</Title>
                         </View>
 
-                        <Input name="name" icon="user" placeholder="Nome"/>
-                        <Input name="user" icon="user" placeholder="Usuário"/>
-                        <Input name="password" icon="lock" placeholder="Senha"/>
-                        <Input name="phone" icon="phone" placeholder="Celular"/>
-                        <Input name="date" icon="calendar" placeholder="Data de nascimento"/>
+                        <Form ref={formRef} onSubmit={handleSignUp}>
+                            <Input name="name" icon="user" placeholder="Nome"/>
+                            <Input name="user" icon="user" placeholder="Usuário"/>
+                            <Input name="password" icon="lock" placeholder="Senha" password={true}/>
+                            <Input name="phone" icon="phone" placeholder="Celular"/>
+                            <Input name="date" icon="calendar" placeholder="Data de nascimento"/>
 
-                        <Button onPress={Cadastrar}>Cadastrar</Button>
+                            <Button onPress={() => { 
+                                formRef.current?.submitForm();
+                                console.log('deu');
+                            }
+                        }>Cadastrar</Button>
+                        </Form>
                     </Container>
                 </ScrollView>
             </KeyboardAvoidingView>

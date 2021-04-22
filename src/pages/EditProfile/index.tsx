@@ -1,20 +1,27 @@
-import React from 'react';
-import {Image, View, KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
+import React, {useRef, useCallback} from 'react';
+import {Image, View, KeyboardAvoidingView, Platform, ScrollView, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+
+import {Form} from '@unform/mobile';
+import {FormHandles} from '@unform/core';
 
 import {useNavigation} from '@react-navigation/native';
 
 import Input from '../../components/input';
 import Button from '../../components/button';
 
-import {Container, Title, BackButton, BackButtonText} from './styles';
+import {Container, HeaderContainer, BorderlessButton, TextHeader, TopBar} from './styles';
 
-const SignUp: React.FC = () => {
+const EditProfile: React.FC = () => {
+    const formRef = useRef<FormHandles>(null)
+
     const navigation = useNavigation();
 
-    const Salvar = () => {
-        console.log('editou perfil');
-    }
+    const handleEditProfie = useCallback((data: object) => {
+        console.log(data);
+        //verificacao
+        navigation.navigate('Inicial');
+    }, []);
 
     return(
         <>
@@ -23,32 +30,36 @@ const SignUp: React.FC = () => {
             behavior={Platform.OS == 'ios' ? 'padding' : undefined}
             enabled
         >
+            <HeaderContainer>
+                <TopBar>
+                <BorderlessButton onPress={() => {navigation.navigate('Inicial')}}>
+                    <Icon name="arrow-left" size={34} color={'#fff'}></Icon>
+                </BorderlessButton>
+                <TextHeader>Editar perfil</TextHeader>
+                <Text></Text>
+                </TopBar>
+            </HeaderContainer>
+
             <ScrollView
                 keyboardShouldPersistTaps='handled'
                 contentContainerStyle={{flex: 1}}
             >
                     <Container style={{backgroundColor:'#235cba'}}>
 
-                        <View>
-                            <Title>Editar perfil</Title>
-                        </View>
+                        <Form ref={formRef} onSubmit={handleEditProfie}>
+                            <Input name="name" icon="user" placeholder="Nome"/>
+                            <Input name="phone" icon="phone" placeholder="Celular"/>
+                            <Input name="date" icon="calendar" placeholder="Data de nascimento"/>
 
-                        <Input name="name" icon="user" placeholder="Nome"/>
-                        <Input name="phone" icon="phone" placeholder="Celular"/>
-                        <Input name="date" icon="calendar" placeholder="Data de nascimento"/>
-
-                        <Button onPress={Salvar}>Salvar</Button>
+                            <Button onPress={()=>{
+                                    formRef.current?.submitForm();
+                                }}>Salvar</Button>
+                        </Form>
                     </Container>
                 </ScrollView>
             </KeyboardAvoidingView>
-
-            <BackButton onPress={() => {navigation.navigate('SignIn')}}>
-                <Icon name="arrow-left" size={20} color="#fff" />
-                <BackButtonText>Voltar</BackButtonText>
-            </BackButton>
-
         </>
     );
 }
 
-export default SignUp;
+export default EditProfile;

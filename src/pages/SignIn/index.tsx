@@ -1,18 +1,29 @@
-import React from 'react';
+import React, {useCallback, useRef} from 'react';
 import {Image, View, KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
-import {useNavigation} from '@react-navigation/native';
+import {Form} from '@unform/mobile';
+import {FormHandles} from '@unform/core';
+
+import {useNavigation} from '@react-navigation/native'
 
 import Input from '../../components/input';
 import Button from '../../components/button';
 
 import logoImg from '../../assets/logo.png';
 
-import {Container, Title, CreateAccountButton, CreateAccountButtonText} from './styles';
+import {Container, Title, CreateAccountButton, CreateAccountButtonText, Logo} from './styles';
 
 const SignIn: React.FC = () => {
+    const formRef = useRef<FormHandles>(null)
+
     const navigation = useNavigation();
+
+    const handleSignIn = useCallback((data: object) => {
+        console.log(data);
+        //verificacao
+        navigation.navigate('Init');
+    }, []);
 
     return(
         <>
@@ -26,16 +37,26 @@ const SignIn: React.FC = () => {
                 contentContainerStyle={{flex: 1}}
             >
                     <Container style={{backgroundColor:'#235cba'}}>
-                        <Image source={logoImg} />
+                        <Image source={logoImg}/>
+
+                        {/* <Logo source={logoImg}></Logo> */}
 
                         <View>
                             <Title>Faça seu login</Title>
                         </View>
 
-                        <Input name="user" icon="user" placeholder="Usuário"/>
-                        <Input name="password" icon="lock" placeholder="Senha"/>
+                        <Form ref={formRef} onSubmit={handleSignIn}>
+                            <Input name="user" icon="user" placeholder="Usuário"/>
+                            <Input name="password" icon="lock" placeholder="Senha" password={true}/>
 
-                        <Button onPress={() => {console.log("entrou")}}>Entrar</Button>
+                            <Button
+                                onPress={()=>{
+                                    formRef.current?.submitForm();
+                                }}
+                            >
+                                Entrar
+                            </Button>
+                        </Form>
                     </Container>
                 </ScrollView>
             </KeyboardAvoidingView>
