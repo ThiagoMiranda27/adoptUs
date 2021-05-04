@@ -46,8 +46,16 @@ export const TopBar = styled.View`
     justify-content: space-between;
 `;
 
-export const BorderlessButton = styled.TouchableOpacity`
+export const BorderlessButton = styled.TouchableOpacity``;
 
+export const ButtonDatePicker = styled.TouchableOpacity`
+    height: 60px;
+    background: #6f93c9;
+    border-radius: 10px;
+    margin-top: 8px;
+
+    justify-content: center;
+    align-items: center;
 `;
 
 export const TextHeader = styled.Text`
@@ -55,3 +63,4 @@ export const TextHeader = styled.Text`
     font-size: 30px;
     font-weight: bold;
 `;
+

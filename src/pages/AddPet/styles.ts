@@ -59,3 +59,35 @@ export const PickerView = styled.View`
     height: 60px;
     margin-bottom: 8px;
 `;
+
+export const ViewRadioButton = styled.View`
+    flex: 1;
+    flex-direction: row;
+`;
+
+export const RadioButtonText = styled.Text`
+    flex-direction: row;
+    color: #090f1b;
+    flex: 2;
+    font-size: 12px;
+    font-family: 'RobotoSlab-Regular';
+`;
+
+export const RadioButtonTitle = styled.Text`
+    color: #090f1b;
+    font-size: 16px;
+    margin-right: 60px;
+    font-family: 'RobotoSlab-Regular';
+`;
+
+export const RadioButtonContainer = styled.View`
+    width: 100%;
+    height: 60px;
+    padding: 0 16px;
+    background: #f2f5f9;
+    border-radius: 10px;
+    margin-bottom: 8px;
+
+    flex-direction: row;
+    align-items: center;
+`;

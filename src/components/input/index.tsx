@@ -18,6 +18,10 @@ const Input: React.FC<InputProps> = ({name, icon, password, ...rest}) => {
     const {registerField, defaultValue = '', fieldName, error} = useField(name);
     const inputValueRef = useRef<InputValueReference>({value: defaultValue});
 
+    function handleChange(value: string){
+
+    }
+
     useEffect(() => {
         registerField({
             name: fieldName,
@@ -35,6 +39,7 @@ const Input: React.FC<InputProps> = ({name, icon, password, ...rest}) => {
                     placeholderTextColor = "#666360"
                     defaultValue = {defaultValue}
                     onChangeText={(value) => {
+                        handleChange(value)
                         inputValueRef.current.value = value;
                     }}
                     {...rest} 
