@@ -21,16 +21,22 @@ const AddPet: React.FC = () => {
     const [checkedVacinado, setCheckedVacinado] = useState('nao');
     const [checkedVermifugado, setCheckedVermifugado] = useState('nao');
     const [checkedCastrado, setCheckedCastrado] = useState('nao');
+    
+    // STRING DE UM CARACTER
+    // 0 - NAO | MACHO
+    // 1 - SIM | FEMEA
+    
+    //MUDAR VALOR DO STATE DOS CAMPOS
 
     const navigation = useNavigation();
 
     const handleAddPet = useCallback((data: object) => {
         console.log(data);
         // console.log('data_cadastro:' + new Date())
-        console.log(checkedSexo)
-        console.log(checkedVacinado)
-        console.log(checkedCastrado)
-        console.log(checkedVermifugado)
+        console.log('sexo:' + checkedSexo)
+        console.log('vacinado:' + checkedVacinado)
+        console.log('castrado:' + checkedCastrado)
+        console.log('vermigfugado:' + checkedVermifugado)
         //verificacao
         navigation.navigate('SuccessAdoption');
     }, []);
@@ -75,105 +81,92 @@ const AddPet: React.FC = () => {
                     </PhotoView>
 
                     <Form ref={formRef} onSubmit={handleAddPet}>
-                        {/* id = UUID  */}
                         {/* desde data_cadastro = DateTime.Now */}
                         <InputWithoutIcon name="name" placeholder="Nome" />
                         <InputWithoutIcon name="animal" placeholder="Animal" />
                         <InputWithoutIcon name="raca" placeholder="Raça" />
-                        {/* <InputWithoutIcon name="sexo" placeholder="Sexo" /> */}
                         <RadioButtonContainer>
                             <RadioButtonTitle>Sexo</RadioButtonTitle>
                             <RadioButtonText>Macho</RadioButtonText>
                             <RadioButton
-                                value='macho'
+                                value='0'
                                 color= '#235cba'
-                                status={checkedSexo === 'macho' ? 'checked' : 'unchecked'}
+                                status={checkedSexo === '0' ? 'checked' : 'unchecked'}
                                 onPress={() => {
-                                    setCheckedSexo('macho')
-                                    // console.log(checked)
+                                    setCheckedSexo('0')
                                 }}
                             />
                             <RadioButtonText>Fêmea</RadioButtonText>
                             <RadioButton
-                                value='femea'
+                                value='1'
                                 color= '#235cba'
-                                status={checkedSexo === 'femea' ? 'checked' : 'unchecked'}
+                                status={checkedSexo === '1' ? 'checked' : 'unchecked'}
                                 onPress={() => {
-                                    setCheckedSexo('femea')
-                                    // console.log(checked)
+                                    setCheckedSexo('1')
                                 }}
                             />
                         </RadioButtonContainer>
                         <InputWithoutIcon name="porte" placeholder="Porte" />
-                        {/* <InputWithoutIcon name="vacinado" placeholder="Vacinado" /> */}
                         <RadioButtonContainer>
                             <RadioButtonTitle>Vacinado</RadioButtonTitle>
                             <RadioButtonText>Sim</RadioButtonText>
                             <RadioButton
-                                value='sim'
+                                value='1'
                                 color= '#235cba'
-                                status={checkedVacinado === 'sim' ? 'checked' : 'unchecked'}
+                                status={checkedVacinado === '1' ? 'checked' : 'unchecked'}
                                 onPress={() => {
-                                    setCheckedVacinado('sim')
-                                    // console.log(checked)
+                                    setCheckedVacinado('1')
                                 }}
                             />
                             <RadioButtonText>Não</RadioButtonText>
                             <RadioButton
-                                value='nao'
+                                value='0'
                                 color= '#235cba'
-                                status={checkedVacinado === 'nao' ? 'checked' : 'unchecked'}
+                                status={checkedVacinado === '0' ? 'checked' : 'unchecked'}
                                 onPress={() => {
-                                    setCheckedVacinado('nao')
-                                    // console.log(checked)
+                                    setCheckedVacinado('0')
                                 }}
                             />
                         </RadioButtonContainer>
-                        {/* <InputWithoutIcon name="castrado" placeholder="Castrado" /> */}
                         <RadioButtonContainer>
                             <RadioButtonTitle>Castrado</RadioButtonTitle>
                             <RadioButtonText>Sim</RadioButtonText>
                             <RadioButton
-                                value='sim'
+                                value='1'
                                 color= '#235cba'
-                                status={checkedCastrado === 'sim' ? 'checked' : 'unchecked'}
+                                status={checkedCastrado === '1' ? 'checked' : 'unchecked'}
                                 onPress={() => {
-                                    setCheckedCastrado('sim')
-                                    // console.log(checked)
+                                    setCheckedCastrado('1')
                                 }}
                             />
                             <RadioButtonText>Não</RadioButtonText>
                             <RadioButton
-                                value='nao'
+                                value='0'
                                 color= '#235cba'
-                                status={checkedCastrado === 'nao' ? 'checked' : 'unchecked'}
+                                status={checkedCastrado === '0' ? 'checked' : 'unchecked'}
                                 onPress={() => {
-                                    setCheckedCastrado('nao')
-                                    // console.log(checked)
+                                    setCheckedCastrado('0')
                                 }}
                             />
                         </RadioButtonContainer>
-                        {/* <InputWithoutIcon name="vermifugado" placeholder="Vermifugado" /> */}
                         <RadioButtonContainer>
                             <RadioButtonTitle>Vermifugado</RadioButtonTitle>
                             <RadioButtonText>Sim</RadioButtonText>
                             <RadioButton
-                                value='sim'
+                                value='1'
                                 color= '#235cba'
-                                status={checkedVermifugado === 'sim' ? 'checked' : 'unchecked'}
+                                status={checkedVermifugado === '1' ? 'checked' : 'unchecked'}
                                 onPress={() => {
-                                    setCheckedVermifugado('sim')
-                                    // console.log(checked)
+                                    setCheckedVermifugado('1')
                                 }}
                             />
                             <RadioButtonText>Não</RadioButtonText>
                             <RadioButton
-                                value='nao'
+                                value='0'
                                 color= '#235cba'
-                                status={checkedVermifugado === 'nao' ? 'checked' : 'unchecked'}
+                                status={checkedVermifugado === '0' ? 'checked' : 'unchecked'}
                                 onPress={() => {
-                                    setCheckedVermifugado('nao')
-                                    // console.log(checked)
+                                    setCheckedVermifugado('0')
                                 }}
                             />
                         </RadioButtonContainer>

@@ -2,6 +2,9 @@ import React, {useRef, useCallback} from 'react';
 import {Image, View, KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
+// import RNPickerSelect from '@react-native-picker/picker';
+import RNPickerSelect from 'react-native-picker-select';
+
 import {Form} from '@unform/mobile';
 import {FormHandles} from '@unform/core';
 
@@ -9,6 +12,7 @@ import {useNavigation} from '@react-navigation/native';
 
 import Input from '../../components/input';
 import Button from '../../components/button';
+import PickerSelect from '../../components/pickerSelect';
 
 import {Container, Title, BackToSignInButton, BackToSignInButtonText} from './styles';
 
@@ -44,12 +48,18 @@ const SignUp: React.FC = () => {
                             <Input name="name" icon="user" placeholder="Nome"/>
                             <Input name="user" icon="user" placeholder="Usuário"/>
                             <Input name="password" icon="lock" placeholder="Senha" password={true}/>
+                            <Input name="email" icon="mail" placeholder="E-mail"/>
                             <Input name="phone" icon="phone" placeholder="Celular"/>
-                            <Input name="date" icon="calendar" placeholder="Data de nascimento"/>
+
+                            {/* <Input name="date" icon="calendar" placeholder="Data de nascimento"/> */}
+
+                            
+
+                            {/* estado
+                            cidade */}
 
                             <Button onPress={() => { 
                                 formRef.current?.submitForm();
-                                console.log('deu');
                             }
                         }>Cadastrar</Button>
                         </Form>
