@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {Form} from '@unform/mobile';
 import {FormHandles} from '@unform/core';
+import Alert from 'react-native-awesome-alerts';
 
 import InputWithoutIcon from '../../components/inputSemIcone';
 import Button from '../../components/button';
@@ -15,6 +16,7 @@ import {useNavigation} from '@react-navigation/native';
 import {Container, HeaderContainer, BorderlessButton,RadioButtonContainer, RadioButtonTitle, TextHeader, TopBar,RadioButtonText, PhotoBox, ViewRadioButton, PhotoView, PhotoText, PickerView} from './styles';
 
 const AddPet: React.FC = () => {
+    const [showAlert, setShowAlert] = useState(false);
     const formRef = useRef<FormHandles>(null)
     const [petPhoto, setPetPhoto] = useState('');
     const [checkedSexo, setCheckedSexo] = useState('macho');
@@ -38,6 +40,10 @@ const AddPet: React.FC = () => {
         console.log('castrado:' + checkedCastrado)
         console.log('vermigfugado:' + checkedVermifugado)
         //verificacao
+        //TODO
+        if(true)
+            setShowAlert(true);
+        else
         navigation.navigate('SuccessAdoption');
     }, []);
 
@@ -185,7 +191,25 @@ const AddPet: React.FC = () => {
                         </Button>
 
 
-
+                        <Alert
+                            show={showAlert}
+                            showProgress={false}
+                            title="Erro ao adicionar pet para adoção"
+                            message="Campo(s) incorreto(s)."
+                            closeOnTouchOutside={true}
+                            closeOnHardwareBackPress={true}
+                            showCancelButton={false}
+                            showConfirmButton={true}
+                            confirmText="Tentar novamente"
+                            confirmButtonColor="#DD6B55"
+                            onConfirmPressed={() => {
+                                setShowAlert(false);
+                            }}
+                            onCancelPressed={()=>{
+                                setShowAlert(false);
+                            }}
+                        >
+                        </Alert>
 
 
                         {/* <PickerView>

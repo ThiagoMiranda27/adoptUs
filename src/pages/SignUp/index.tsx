@@ -1,9 +1,10 @@
-import React, {useRef, useCallback} from 'react';
+import React, {useRef, useCallback, useState} from 'react';
 import {Image, View, KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 // import RNPickerSelect from '@react-native-picker/picker';
 import RNPickerSelect from 'react-native-picker-select';
+import Alert from 'react-native-awesome-alerts';
 
 import {Form} from '@unform/mobile';
 import {FormHandles} from '@unform/core';
@@ -17,6 +18,7 @@ import PickerSelect from '../../components/pickerSelect';
 import {Container, Title, BackToSignInButton, BackToSignInButtonText} from './styles';
 
 const SignUp: React.FC = () => {
+    const [showAlert, setShowAlert] = useState(false);
     const navigation = useNavigation();
 
     const formRef = useRef<FormHandles>(null);
@@ -24,7 +26,11 @@ const SignUp: React.FC = () => {
     const handleSignUp = useCallback((data: object) => {
         console.log(data);
         //novo usuario
-        navigation.navigate('SuccessSignUp');
+        //TODO
+        if(true)
+            setShowAlert(true);
+        else
+            navigation.navigate('SuccessSignUp');
     }, []);
 
     return(
@@ -63,6 +69,27 @@ const SignUp: React.FC = () => {
                             }
                         }>Cadastrar</Button>
                         </Form>
+
+                        <Alert
+                            show={showAlert}
+                            showProgress={false}
+                            title="Erro ao cadastrar"
+                            message="Campo(s) incorreto(s)."
+                            closeOnTouchOutside={true}
+                            closeOnHardwareBackPress={true}
+                            showCancelButton={false}
+                            showConfirmButton={true}
+                            confirmText="Tentar novamente"
+                            confirmButtonColor="#DD6B55"
+                            onConfirmPressed={() => {
+                                setShowAlert(false);
+                            }}
+                            onCancelPressed={()=>{
+                                setShowAlert(false);
+                            }}
+                        >
+                        </Alert>
+
                     </Container>
                 </ScrollView>
             </KeyboardAvoidingView>

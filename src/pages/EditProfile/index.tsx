@@ -3,6 +3,7 @@ import {Image, View, KeyboardAvoidingView, Platform, ScrollView, Text} from 'rea
 import Icon from 'react-native-vector-icons/Feather';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
+import Alert from 'react-native-awesome-alerts';
 
 import {Form} from '@unform/mobile';
 import {FormHandles} from '@unform/core';
@@ -15,6 +16,7 @@ import Button from '../../components/button';
 import {Container, HeaderContainer, BorderlessButton, TextHeader, TopBar, ButtonDatePicker} from './styles';
 
 const EditProfile: React.FC = () => {
+    const [showAlert, setShowAlert] = useState(false);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [showDatePicker, setShowDatePicker] = useState(false);
 
@@ -40,6 +42,11 @@ const EditProfile: React.FC = () => {
         console.log(data);
         // console.log(selectedDate);
         //verificacao
+        //TODO
+        if(true)
+            setShowAlert(true);
+        else
+        navigation.navigate('Inicial')
     }, []);
 
     return(
@@ -91,6 +98,27 @@ const EditProfile: React.FC = () => {
                                     formRef.current?.submitForm();
                                 }}>Salvar</Button>
                         </Form>
+
+                        <Alert
+                            show={showAlert}
+                            showProgress={false}
+                            title="Erro ao editar perfil"
+                            message="Campo(s) incorreto(s)."
+                            closeOnTouchOutside={true}
+                            closeOnHardwareBackPress={true}
+                            showCancelButton={false}
+                            showConfirmButton={true}
+                            confirmText="Tentar novamente"
+                            confirmButtonColor="#DD6B55"
+                            onConfirmPressed={() => {
+                                setShowAlert(false);
+                            }}
+                            onCancelPressed={()=>{
+                                setShowAlert(false);
+                            }}
+                        >
+                        </Alert>
+                        
                     </Container>
                 </ScrollView>
             </KeyboardAvoidingView>
