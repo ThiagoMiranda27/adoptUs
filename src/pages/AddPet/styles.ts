@@ -12,7 +12,7 @@ export const Container = styled.View`
 
 export const HeaderContainer = styled.View`
     padding: 20px;
-    background-color: #235cba;
+    background-color: #854695;
 `;
 
 export const TopBar = styled.View`

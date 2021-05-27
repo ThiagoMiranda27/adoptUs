@@ -41,7 +41,7 @@ const AddPet: React.FC = () => {
         console.log('vermigfugado:' + checkedVermifugado)
         //verificacao
         //TODO
-        if(true)
+        if(false)
             setShowAlert(true);
         else
         navigation.navigate('SuccessAdoption');
@@ -77,13 +77,13 @@ const AddPet: React.FC = () => {
                 keyboardShouldPersistTaps='handled'
             >
 
-                <Container style={{backgroundColor:'#235cba'}}>
+                <Container style={{backgroundColor:'#854695'}}>
                 
                     <PhotoView>
                             <PhotoBox onPress={handleChoosePhoto} >
                                 <Icon name="plus" size={54} color={'#fff'}></Icon>
                             </PhotoBox>
-                            <PhotoText>Coloque uma foto do pet</PhotoText>
+                            <PhotoText>Coloque uma foto do pet aqui</PhotoText>
                     </PhotoView>
 
                     <Form ref={formRef} onSubmit={handleAddPet}>

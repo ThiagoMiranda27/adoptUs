@@ -7,6 +7,7 @@ export const Container = styled.View`
     align-items: center;
     justify-content: center;
     padding: 0 30px ${Platform.OS == 'android' ? 150 : 40}px;
+    width: 100%;
 `;
 
 export const Title = styled.Text`
@@ -37,7 +38,7 @@ export const BackButtonText = styled.Text`
 
 export const HeaderContainer = styled.View`
     padding: 20px;
-    background-color: #235cba;
+    background-color: #854695;
 `;
 
 export const TopBar = styled.View`

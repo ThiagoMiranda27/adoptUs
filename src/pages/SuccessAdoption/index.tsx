@@ -13,9 +13,9 @@ const SuccessAdoption: React.FC = () => {
 
     return(
         <>
-            <Container style={{backgroundColor:'#235cba'}}>
+            <Container style={{backgroundColor:'#854696'}}>
                 <View>
-                    <Icon name="check" size={80} color="#fff" />
+                    <Icon name="check" size={80} color="#FFF" />
                 </View>
                 <View>
                     <Title>Obrigado pela sua iniciativa!</Title>

@@ -13,7 +13,7 @@ const SuccessSignUp: React.FC = () => {
 
     return(
         <>
-            <Container style={{backgroundColor:'#235cba'}}>
+            <Container style={{backgroundColor:'#854793'}}>
                 <View>
                     <Icon name="check" size={80} color="#fff" />
                 </View>

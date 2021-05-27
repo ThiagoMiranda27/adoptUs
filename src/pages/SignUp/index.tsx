@@ -27,7 +27,7 @@ const SignUp: React.FC = () => {
         console.log(data);
         //novo usuario
         //TODO
-        if(true)
+        if(false)
             setShowAlert(true);
         else
             navigation.navigate('SuccessSignUp');
@@ -44,7 +44,7 @@ const SignUp: React.FC = () => {
                 keyboardShouldPersistTaps='handled'
                 contentContainerStyle={{flex: 1}}
             >
-                    <Container style={{backgroundColor:'#235cba'}}>
+                    <Container style={{backgroundColor:'#854793'}}>
 
                         <View>
                             <Title>Crie sua conta</Title>
@@ -95,7 +95,7 @@ const SignUp: React.FC = () => {
             </KeyboardAvoidingView>
 
             <BackToSignInButton onPress={() => {navigation.navigate('SignIn')}}>
-                <Icon name="arrow-left" size={20} color="#fff" />
+                <Icon name="arrow-left" size={20} color="#fed26f" />
                 <BackToSignInButtonText>Voltar para Login</BackToSignInButtonText>
             </BackToSignInButton>
         </>

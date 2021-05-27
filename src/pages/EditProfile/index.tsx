@@ -67,10 +67,10 @@ const EditProfile: React.FC = () => {
             </HeaderContainer>
 
             <ScrollView
-                // keyboardShouldPersistTaps='handled'
-                // contentContainerStyle={{flex: 1}}
+                keyboardShouldPersistTaps='handled'
+                contentContainerStyle={{flex: 1}}
             >
-                    <Container style={{backgroundColor:'#235cba'}}>
+                    <Container style={{backgroundColor:'#854695'}}>
 
                         <Form ref={formRef} onSubmit={handleEditProfie}>
                             <Input name="name" icon="user" placeholder="Nome"/>

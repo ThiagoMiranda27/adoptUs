@@ -42,7 +42,7 @@ const SignIn: React.FC = () => {
                 keyboardShouldPersistTaps='handled'
                 contentContainerStyle={{flex: 1}}
             >
-                    <Container style={{backgroundColor:'#235cba'}}>
+                    <Container style={{backgroundColor:'#864691'}}>
                         <Image source={logoImg}/>
 
                         {/* <Logo source={logoImg}></Logo> */}
@@ -89,7 +89,7 @@ const SignIn: React.FC = () => {
             </KeyboardAvoidingView>
 
             <CreateAccountButton onPress={() => {navigation.navigate('SignUp')}}>
-                <Icon name="log-in" size={20} color="#f2f5f9" />
+                <Icon name="log-in" size={20} color="#fed26f" />
                 <CreateAccountButtonText>Criar uma conta</CreateAccountButtonText>
             </CreateAccountButton>
         </>

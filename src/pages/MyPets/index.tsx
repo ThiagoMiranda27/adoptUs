@@ -25,7 +25,7 @@ const MyPets: React.FC = () => {
 
             <ScrollView
             >
-                    <Container style={{backgroundColor:'#235cba'}}>
+                    <Container style={{backgroundColor:'#854695'}}>
 
                     <MyPetsItem></MyPetsItem>
                     <MyPetsItem></MyPetsItem>

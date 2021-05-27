@@ -42,7 +42,7 @@ function Tab() {
           tabBarLabel: 'Pets',
           tabBarIcon: ({ color, size, focused }) => {
             return (
-              <Icon name="github" size={size} color={focused ? '#235cba' : color} />
+              <Icon name="github" size={size} color={focused ? 'black' : color} />
             );
           }
         }}
@@ -54,7 +54,7 @@ function Tab() {
           tabBarLabel: 'Meus pets',
           tabBarIcon: ({ color, size, focused }) => {
             return (
-              <Icon name="align-justify" size={size} color={focused ? '#235cba' : color} />
+              <Icon name="align-justify" size={size} color={focused ? 'black' : color} />
             );
           }
         }}

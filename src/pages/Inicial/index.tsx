@@ -23,7 +23,7 @@ const Inicial: React.FC = () => {
                 </TopBar>
             </HeaderContainer>
 
-            <Container style={{backgroundColor:'#235cba'}}>
+            <Container style={{backgroundColor:'#854695'}}>
             <ScrollView
                 keyboardShouldPersistTaps='handled'
                 horizontal={true}
