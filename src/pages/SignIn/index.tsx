@@ -12,6 +12,7 @@ import Input from '../../components/input';
 import Button from '../../components/button';
 
 import logoImg from '../../assets/logo.png';
+import api from '../../services/api';
 
 import {Container, Title, CreateAccountButton, CreateAccountButtonText, Logo} from './styles';
 
