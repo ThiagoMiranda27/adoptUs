@@ -2,15 +2,25 @@ import React from 'react';
 
 import {Container, Profile, Avatar, ProfileInfo, Name} from './styles';
 
-const MyPetsItem: React.FC = () => {
+export interface Pet {
+    id: number;
+    nome: string;
+    link_foto: string;
+}
+
+interface PetProps {
+    pet: Pet;
+}
+
+const MyPetsItem: React.FC<PetProps> = ({pet}) => {
 
     return(
         <Container>
             <Profile>
-                <Avatar source={{uri: 'https://store.playstation.com/store/api/chihiro/00_09_000/container/BR/pt/19/UP2477-CUSA06694_00-AV00000000000039/image?w=320&h=320&bg_color=000000&opacity=100&_version=00_09_000'}} ></Avatar>
+                <Avatar source={{uri: pet.link_foto}} ></Avatar>
 
                 <ProfileInfo>
-                    <Name>'nome'</Name>
+                    <Name>{pet.nome}</Name>
                 </ProfileInfo>
             </Profile>
         </Container>

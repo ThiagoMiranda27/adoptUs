@@ -3,44 +3,66 @@ import React from 'react';
 import whatsAppIcon from '../../assets/whatsapp.png';
 
 import {Container, Profile, Avatar, ProfileInfo, Name, Subject, Bio, Footer, ContactButton, ButtonsContainer, ContactButtonText, TextBio} from './styles';
-import { Image } from 'react-native';
+import { Image, Linking } from 'react-native';
 
-const PetItem: React.FC = () => {
+export interface Pet {
+    id: number;
+    nome: string;
+    data_cadastro: string;
+    link_foto: string;
+    tipo: string;
+    vacinado: string;
+    raca: string;
+    castrado: string;
+    sexo: string;
+    vermifugado: string;
+    porte: string;
+    biografia: string;
+    contato: string;
+}
 
-    //get de todos cadastrados. Renderiza com um .map
+interface PetProps {
+    pet: Pet;
+}
+
+const PetItem: React.FC<PetProps> = ({pet}) => {
+
+    function handleLinkToWhatsapp(){
+        Linking.openURL(`whatsapp://send?phone=${pet.contato}`)
+    }
 
     return(
         <Container>
             <Profile>
-                <Avatar source={{uri: 'https://store.playstation.com/store/api/chihiro/00_09_000/container/BR/pt/19/UP2477-CUSA06694_00-AV00000000000039/image?w=320&h=320&bg_color=000000&opacity=100&_version=00_09_000'}} ></Avatar>
+                <Avatar source={{uri: pet.link_foto}} ></Avatar>
 
                 <ProfileInfo>
-                    <Name>'name'</Name>
-                    <Subject>Desde 'data_cadastro'</Subject>
+                    <Name>{pet.nome}</Name>
+                    <Subject>Desde {pet.data_cadastro}</Subject>
                 </ProfileInfo>
             </Profile>
             <Bio>
-                <TextBio>Tipo: 'string'</TextBio>
-                <TextBio>Vacinado: 'bool'</TextBio>
+                <TextBio>Tipo: {pet.tipo}</TextBio>
+                <TextBio>Vacinado: {pet.vacinado}</TextBio>
             </Bio>
             <Bio>
-                <TextBio>Raça: 'string'</TextBio>
-                <TextBio>Castrado: 'bool'</TextBio>
+                <TextBio>Raça: {pet.raca}</TextBio>
+                <TextBio>Castrado: {pet.castrado}</TextBio>
             </Bio>
             <Bio>
-                <TextBio>Sexo: 'string'</TextBio>
-                <TextBio>Vermifugado: 'bool'</TextBio>
+                <TextBio>Sexo: {pet.sexo}</TextBio>
+                <TextBio>Vermifugado: {pet.vermifugado}</TextBio>
             </Bio>
             <Bio>
-                <TextBio>Porte: 'string'</TextBio>
+                <TextBio>Porte: {pet.porte}</TextBio>
             </Bio>
             <Bio>
-                <TextBio>Biografia: 'string'</TextBio>
+                <TextBio>Biografia: {pet.biografia}</TextBio>
             </Bio>
 
             <Footer>
                 <ButtonsContainer>
-                    <ContactButton>
+                    <ContactButton onPress={handleLinkToWhatsapp}>
                         <Image source={whatsAppIcon}></Image>
                         <ContactButtonText>Entrar em contato</ContactButtonText>
                     </ContactButton>

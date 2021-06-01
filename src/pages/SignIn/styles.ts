@@ -40,7 +40,9 @@ export const CreateAccountButtonText = styled.Text`
     margin-left: 16px;
 `;
 
+// height: 70px;
+// width: 100%;
+
 export const Logo = styled.Image`
-    height: 70px;
-    width: 100%;
+
 `

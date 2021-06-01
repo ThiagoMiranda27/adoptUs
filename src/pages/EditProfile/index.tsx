@@ -5,6 +5,8 @@ import Icon from 'react-native-vector-icons/Feather';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Alert from 'react-native-awesome-alerts';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import {Form} from '@unform/mobile';
 import {FormHandles} from '@unform/core';
 
@@ -38,16 +40,20 @@ const EditProfile: React.FC = () => {
 
     const navigation = useNavigation();
 
-    const handleEditProfie = useCallback((data: object) => {
-        console.log(data);
+    const handleEditProfie = async(data: object) => {
+
+        const user = await AsyncStorage.getItem('@user');
+        console.log(user);
+
+        // console.log(data);
         // console.log(selectedDate);
         //verificacao
         //TODO
-        if(true)
-            setShowAlert(true);
-        else
-        navigation.navigate('Inicial')
-    }, []);
+        // if(true)
+        //     setShowAlert(true);
+        // else
+        // navigation.navigate('Inicial')
+    };
 
     return(
         <>

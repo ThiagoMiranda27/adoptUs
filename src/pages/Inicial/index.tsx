@@ -1,15 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {ScrollView, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 
-import PetItem from '../../components/petItem';
+import PetItem, {Pet} from '../../components/petItem';
+
+import api from '../../services/api';
 
 import {HeaderContainer, TopBar, BorderlessButton, Container, TextHeader} from './styles';
 
 const Inicial: React.FC = () => {
     const navigation = useNavigation();
+
+    const [pets, setPets] = useState([]);
+
+    async function loadPets() {
+        try {
+            const { data } = await api.get("/pets");
+            console.log(data)
+          } catch (err) {
+            console.error(err)
+          }
+    }
+
+    useFocusEffect(
+        React.useCallback(() => {
+            loadPets();
+        }, [])
+    );
 
     return(
         <>
@@ -28,13 +47,15 @@ const Inicial: React.FC = () => {
                 keyboardShouldPersistTaps='handled'
                 horizontal={true}
             >
-                {/* map dos pets no banco conforme o filtro */}
-                    <PetItem></PetItem>
-                    <PetItem></PetItem>
-                    <PetItem></PetItem>
-                    <PetItem></PetItem>
-
-                    
+                
+                {pets.map((pet: Pet) => {
+                    return (
+                        <PetItem 
+                            key={pet.id}
+                            pet={pet}
+                        />
+                    )
+                })}
                 
             </ScrollView>
             </Container>

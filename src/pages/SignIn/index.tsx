@@ -1,6 +1,8 @@
-import React, {useCallback, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {Image, View, KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {Form} from '@unform/mobile';
 import {FormHandles} from '@unform/core';
@@ -16,21 +18,47 @@ import api from '../../services/api';
 
 import {Container, Title, CreateAccountButton, CreateAccountButtonText, Logo} from './styles';
 
+interface SignInFormData {
+    user: string;
+    password: string;
+}
+
 const SignIn: React.FC = () => {
     const [showAlert, setShowAlert] = useState(false);
     const formRef = useRef<FormHandles>(null)
 
     const navigation = useNavigation();
 
-    const handleSignIn = useCallback((data: object) => {
-        console.log(data);
-        //verificacao
-        //TODO
-        if(false)
-            setShowAlert(true);
-        else
+    // const checkLogin = async () => {
+    //     const user = await AsyncStorage.getItem('@user');
+    //     if(user){
+    //         navigation.navigate('Init');
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     checkLogin();
+    // }, [])
+
+    const handleSignIn = async (data: SignInFormData) => {
+        const params = [
+            data.user,
+            data.password
+        ]
+
+        console.log(params);
+
+        // const response = await api.post('/signin', params);
+
+        // console.log(response.data);
+
+        // if(true) //response.status != 200
+        //     setShowAlert(true);
+        // else {
+            await AsyncStorage.setItem('@user', JSON.stringify(params))
             navigation.navigate('Init');
-    }, []);
+        // }
+    }
 
     return(
         <>

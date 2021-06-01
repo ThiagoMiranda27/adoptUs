@@ -11,11 +11,20 @@ import {FormHandles} from '@unform/core';
 
 import {useNavigation} from '@react-navigation/native';
 
+import api from '../../services/api';
+
 import Input from '../../components/input';
 import Button from '../../components/button';
-import PickerSelect from '../../components/pickerSelect';
 
 import {Container, Title, BackToSignInButton, BackToSignInButtonText} from './styles';
+
+interface SignUpFormData {
+    name: string;
+    user: string;
+    password: string;
+    email: string;
+    phone: string;
+}
 
 const SignUp: React.FC = () => {
     const [showAlert, setShowAlert] = useState(false);
@@ -23,15 +32,28 @@ const SignUp: React.FC = () => {
 
     const formRef = useRef<FormHandles>(null);
 
-    const handleSignUp = useCallback((data: object) => {
-        console.log(data);
-        //novo usuario
-        //TODO
-        if(false)
-            setShowAlert(true);
-        else
+    const handleSignUp = async (data: SignUpFormData) => {
+        const params = [
+            data.name,
+            data.user,
+            data.password,
+            data.email,
+            data.phone
+        ]
+
+        console.log(params);
+
+        // const response = await api.post('/signup', params);
+
+        // console.log(response);
+        
+        // if(true) //response.status != 200
+        //     setShowAlert(true);
+        // else
             navigation.navigate('SuccessSignUp');
-    }, []);
+    };
+
+    
 
     return(
         <>
