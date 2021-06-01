@@ -66,7 +66,7 @@ const SignUp: React.FC = () => {
                 keyboardShouldPersistTaps='handled'
                 contentContainerStyle={{flex: 1}}
             >
-                    <Container style={{backgroundColor:'#854793'}}>
+                    <Container style={{backgroundColor:'#b07b61'}}>
 
                         <View>
                             <Title>Crie sua conta</Title>

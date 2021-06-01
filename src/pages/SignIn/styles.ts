@@ -23,7 +23,7 @@ export const CreateAccountButton = styled.TouchableOpacity`
     left: 0;
     bottom: 0;
     right: 0;
-    background: #854695;
+    background: #b07b61;
     border-top-width: 1px;
     border-top-color: #232129;
     padding: 16px 0 ${16 + getBottomSpace()}px;
@@ -39,10 +39,3 @@ export const CreateAccountButtonText = styled.Text`
     font-family: 'RobotoSlab-Regular';
     margin-left: 16px;
 `;
-
-// height: 70px;
-// width: 100%;
-
-export const Logo = styled.Image`
-
-`

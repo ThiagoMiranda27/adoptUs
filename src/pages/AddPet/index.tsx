@@ -77,7 +77,7 @@ const AddPet: React.FC = () => {
                 keyboardShouldPersistTaps='handled'
             >
 
-                <Container style={{backgroundColor:'#854695'}}>
+                <Container style={{backgroundColor:'#b07b61'}}>
                 
                     <PhotoView>
                             <PhotoBox onPress={handleChoosePhoto} >

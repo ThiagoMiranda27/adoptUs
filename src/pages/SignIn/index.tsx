@@ -16,7 +16,7 @@ import Button from '../../components/button';
 import logoImg from '../../assets/logo.png';
 import api from '../../services/api';
 
-import {Container, Title, CreateAccountButton, CreateAccountButtonText, Logo} from './styles';
+import {Container, Title, CreateAccountButton, CreateAccountButtonText} from './styles';
 
 interface SignInFormData {
     user: string;
@@ -71,10 +71,8 @@ const SignIn: React.FC = () => {
                 keyboardShouldPersistTaps='handled'
                 contentContainerStyle={{flex: 1}}
             >
-                    <Container style={{backgroundColor:'#864691'}}>
+                    <Container style={{backgroundColor:'#b07b61'}}>
                         <Image source={logoImg}/>
-
-                        {/* <Logo source={logoImg}></Logo> */}
 
                         <View>
                             <Title>Faça seu login</Title>

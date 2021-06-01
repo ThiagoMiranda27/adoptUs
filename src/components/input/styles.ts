@@ -13,14 +13,16 @@ export const Container = styled.View`
     align-items: center;
 `;
 
+// cor: cinza
 export const TextInput = styled.TextInput`
     flex: 1;
-    color: #854695;
+    color: #594d46;
     font-size: 16px;
     font-family: 'RobotoSlab-Regular';
 `;
 
+// cor: cinza
 export const Icon = styled(FeatherIcon)`
     margin-right: 16px;
-    color: #854695;
+    color: #594d46;
 `;

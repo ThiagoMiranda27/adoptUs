@@ -38,7 +38,7 @@ export const BackButtonText = styled.Text`
 
 export const HeaderContainer = styled.View`
     padding: 20px;
-    background-color: #854695;
+    background-color: #b07b61;
 `;
 
 export const TopBar = styled.View`

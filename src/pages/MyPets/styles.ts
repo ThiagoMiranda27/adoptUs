@@ -3,7 +3,7 @@ import {Platform} from 'react-native';
 
 export const HeaderContainer = styled.View`
     padding: 20px;
-    background-color: #854695;
+    background-color: #b07b61;
 `;
 
 export const TopBar = styled.View`
@@ -28,4 +28,3 @@ export const TextHeader = styled.Text`
     font-size: 30px;
     font-weight: bold;
 `;
-

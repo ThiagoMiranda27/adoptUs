@@ -49,7 +49,7 @@ const MyPets: React.FC = () => {
             <ScrollView
                 keyboardShouldPersistTaps='handled'
             >
-                    <Container style={{backgroundColor:'#854695'}}>
+                    <Container style={{backgroundColor:'#b07b61'}}>
 
                     {pets.map((pet: Pet) => {
                         return (

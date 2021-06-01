@@ -19,22 +19,22 @@ import {Container, HeaderContainer, BorderlessButton, TextHeader, TopBar, Button
 
 const EditProfile: React.FC = () => {
     const [showAlert, setShowAlert] = useState(false);
-    const [selectedDate, setSelectedDate] = useState(new Date());
-    const [showDatePicker, setShowDatePicker] = useState(false);
+    // const [selectedDate, setSelectedDate] = useState(new Date());
+    // const [showDatePicker, setShowDatePicker] = useState(false);
 
-    const handleToggleDatePicker = useCallback(() => {
-        setShowDatePicker((state) => !state);
-    }, []);
+    // const handleToggleDatePicker = useCallback(() => {
+    //     setShowDatePicker((state) => !state);
+    // }, []);
 
-    const handleDateChange = useCallback((event: any, date: Date | undefined) => {
-        if(Platform.OS == 'android'){
-            setShowDatePicker(false);
-        }
+    // const handleDateChange = useCallback((event: any, date: Date | undefined) => {
+    //     if(Platform.OS == 'android'){
+    //         setShowDatePicker(false);
+    //     }
 
-        if(date){
-            setSelectedDate(selectedDate);
-        }
-    },[])
+    //     if(date){
+    //         setSelectedDate(selectedDate);
+    //     }
+    // },[])
 
     const formRef = useRef<FormHandles>(null)
 
@@ -76,7 +76,7 @@ const EditProfile: React.FC = () => {
                 keyboardShouldPersistTaps='handled'
                 contentContainerStyle={{flex: 1}}
             >
-                    <Container style={{backgroundColor:'#854695'}}>
+                    <Container style={{backgroundColor:'#b07b61'}}>
 
                         <Form ref={formRef} onSubmit={handleEditProfie}>
                             <Input name="name" icon="user" placeholder="Nome"/>
@@ -86,8 +86,8 @@ const EditProfile: React.FC = () => {
                                 Selecionar data de nascimento
                             </ButtonDatePicker> */}
                             <Input name="email" icon="mail" placeholder="E-mail"/>
-                            <Input name="estado" icon="menu" placeholder="Estado"/>
-                            <Input name="cidade" icon="menu" placeholder="Cidade"/>
+                            {/* <Input name="estado" icon="menu" placeholder="Estado"/> */}
+                            {/* <Input name="cidade" icon="menu" placeholder="Cidade"/> */}
                             {/* <Input name="cep" icon="menu" placeholder="Cep   *somente números*"/> */}
                             {/* <Input name="rua" icon="menu" placeholder="Rua"/> */}
                             {/* <Input name="numero" icon="menu" placeholder="Número"/> */}
