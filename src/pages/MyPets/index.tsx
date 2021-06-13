@@ -18,14 +18,14 @@ const MyPets: React.FC = () => {
     const [pets, setPets] = useState([]);
 
     async function loadPets() {
-        const user = await AsyncStorage.getItem('@user');
-        console.log(user);
-        // try {
-        //     const { data } = await api.get("/pets"); //COM ID DO USUARIO LOGADO
-        //     console.log(data)
-        //   } catch (err) {
-        //     console.error(err)
-        //   }
+        const user_id = await AsyncStorage.getItem('@user_id');
+        try {
+            const response = await api.get("/mypets", { params: { id_dono: user_id } });
+            // console.log(response.data)
+            setPets(response.data.message);
+          } catch (err) {
+            console.error(err)
+          }
     }
 
     useFocusEffect(
@@ -51,10 +51,10 @@ const MyPets: React.FC = () => {
             >
                     <Container style={{backgroundColor:'#b07b61'}}>
 
-                    {pets.map((pet: Pet) => {
+                    {pets.map((pet: Pet, index) => {
                         return (
                             <MyPetsItem 
-                                key={pet.id}
+                                key={index}
                                 pet={pet}
                             />
                         )})

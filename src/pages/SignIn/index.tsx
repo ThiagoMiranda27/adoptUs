@@ -41,23 +41,33 @@ const SignIn: React.FC = () => {
     // }, [])
 
     const handleSignIn = async (data: SignInFormData) => {
-        const params = [
-            data.user,
-            data.password
-        ]
+        const params = {
+            login: data.user,
+            senha: data.password
+        }
 
-        console.log(params);
+        // console.log(params);
 
-        // const response = await api.post('/signin', params);
+        // verificar campos nulos
+        if(data.user === "" || data.password === ""){
+            console.log('campo null')
+            setShowAlert(true)
+            return;
+        }
 
-        // console.log(response.data);
+        const response = await api.post('/signin', params);
+        console.log('User ID: ', response.data.message[0].ID_USUARIO)
+        console.log(response.data.message.length)
 
-        // if(true) //response.status != 200
-        //     setShowAlert(true);
-        // else {
-            await AsyncStorage.setItem('@user', JSON.stringify(params))
+        if(response.data.message.length !== 1)
+            setShowAlert(true);
+        else {
+            await AsyncStorage.setItem('@user_id', JSON.stringify(response.data.message[0].ID_USUARIO))
+            await AsyncStorage.setItem('@nome', JSON.stringify(response.data.message[0].NOME))
+            await AsyncStorage.setItem('@celular', JSON.stringify(response.data.message[0].CELULAR))
+            await AsyncStorage.setItem('@email', JSON.stringify(response.data.message[0].EMAIL))
             navigation.navigate('Init');
-        // }
+        }
     }
 
     return(

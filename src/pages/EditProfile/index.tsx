@@ -2,57 +2,78 @@ import React, {useRef, useCallback, useState} from 'react';
 import {Image, View, KeyboardAvoidingView, Platform, ScrollView, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
-import DateTimePicker from '@react-native-community/datetimepicker';
 import Alert from 'react-native-awesome-alerts';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import api from '../../services/api';
+
 import {Form} from '@unform/mobile';
 import {FormHandles} from '@unform/core';
 
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useFocusEffect} from '@react-navigation/native';
 
 import Input from '../../components/input';
 import Button from '../../components/button';
 
 import {Container, HeaderContainer, BorderlessButton, TextHeader, TopBar, ButtonDatePicker} from './styles';
 
+interface EditProfileFormData {
+    name: string;
+    phone: string;
+    email: string;
+}
+
 const EditProfile: React.FC = () => {
     const [showAlert, setShowAlert] = useState(false);
-    // const [selectedDate, setSelectedDate] = useState(new Date());
-    // const [showDatePicker, setShowDatePicker] = useState(false);
-
-    // const handleToggleDatePicker = useCallback(() => {
-    //     setShowDatePicker((state) => !state);
-    // }, []);
-
-    // const handleDateChange = useCallback((event: any, date: Date | undefined) => {
-    //     if(Platform.OS == 'android'){
-    //         setShowDatePicker(false);
-    //     }
-
-    //     if(date){
-    //         setSelectedDate(selectedDate);
-    //     }
-    // },[])
+    const [showAlertSuccess, setShowAlertSuccess] = useState(false);
+    const [nome, setNome] = useState('');
+    const [celular, setCelular] = useState('');
+    const [email, setEmail] = useState('');
 
     const formRef = useRef<FormHandles>(null)
 
     const navigation = useNavigation();
 
-    const handleEditProfie = async(data: object) => {
+    async function loadData() {
+        let nomeStorage = await AsyncStorage.getItem('@nome');
+        let celularStorage = await AsyncStorage.getItem('@celular');
+        let emailStorage = await AsyncStorage.getItem('@email');
 
-        const user = await AsyncStorage.getItem('@user');
-        console.log(user);
+        setNome(nomeStorage.slice(1, -1))
+        setCelular(celularStorage.slice(1, -1));
+        setEmail(emailStorage.slice(1, -1));
+    }
 
-        // console.log(data);
-        // console.log(selectedDate);
-        //verificacao
-        //TODO
-        // if(true)
-        //     setShowAlert(true);
-        // else
-        // navigation.navigate('Inicial')
+    useFocusEffect(
+        React.useCallback(() => {
+            loadData();
+        }, [])
+    );
+
+    const handleEditProfie = async(data: EditProfileFormData) => {
+
+        const user_id = await AsyncStorage.getItem('@user_id');
+        console.log(user_id);
+
+        console.log(data);
+
+        const params = {
+            id_usuario: user_id,
+            nome: data.name,
+            celular: data.phone,
+            email: data.email
+        }
+
+        if(data.name === "" || data.phone === "" || data.email === ""){
+            console.log('campo null')
+            setShowAlert(true);
+            return;
+        }
+        else{
+            api.put('/editprofile', params)//TODO
+                setShowAlertSuccess(true)
+        }
     };
 
     return(
@@ -79,26 +100,10 @@ const EditProfile: React.FC = () => {
                     <Container style={{backgroundColor:'#b07b61'}}>
 
                         <Form ref={formRef} onSubmit={handleEditProfie}>
-                            <Input name="name" icon="user" placeholder="Nome"/>
-                            <Input name="phone" icon="phone" placeholder="Celular"/>
-                            {/* <Input name="date" icon="calendar" placeholder="Data nasc.   *somente números*"/> */}
-                            {/* <ButtonDatePicker onPress={handleToggleDatePicker}>
-                                Selecionar data de nascimento
-                            </ButtonDatePicker> */}
-                            <Input name="email" icon="mail" placeholder="E-mail"/>
-                            {/* <Input name="estado" icon="menu" placeholder="Estado"/> */}
-                            {/* <Input name="cidade" icon="menu" placeholder="Cidade"/> */}
-                            {/* <Input name="cep" icon="menu" placeholder="Cep   *somente números*"/> */}
-                            {/* <Input name="rua" icon="menu" placeholder="Rua"/> */}
-                            {/* <Input name="numero" icon="menu" placeholder="Número"/> */}
-                            {/* <Input name="complemento" icon="menu" placeholder="Complemento"/> */}
-
-                            {/* {showDatePicker && <DateTimePicker 
-                                mode="date"
-                                display="calendar"
-                                onChange={handleDateChange}
-                                value ={selectedDate}
-                            />} */}
+                            <Input name="name" icon="user" placeholder="Nome" defaultValue={nome}/>
+                            <Input name="phone" icon="phone" placeholder="Celular" defaultValue={celular}/>
+                            <Input name="email" icon="mail" placeholder="E-mail" defaultValue={email}/>
+                            {/* SENHA */}
 
                             <Button onPress={()=>{
                                     formRef.current?.submitForm();
@@ -121,6 +126,26 @@ const EditProfile: React.FC = () => {
                             }}
                             onCancelPressed={()=>{
                                 setShowAlert(false);
+                            }}
+                        >
+                        </Alert>
+
+                        <Alert
+                            show={showAlertSuccess}
+                            showProgress={false}
+                            title="Alteração concluída!"
+                            closeOnTouchOutside={true}
+                            closeOnHardwareBackPress={true}
+                            showCancelButton={false}
+                            showConfirmButton={true}
+                            confirmText="OK"
+                            confirmButtonColor="#fed26f"
+                            onConfirmPressed={() => {
+                                setShowAlertSuccess(false);
+                                navigation.navigate('Init');
+                            }}
+                            onCancelPressed={()=>{
+                                setShowAlertSuccess(false);
                             }}
                         >
                         </Alert>

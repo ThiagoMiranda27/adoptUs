@@ -2,8 +2,6 @@ import React, {useRef, useCallback, useState} from 'react';
 import {Image, View, KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
-// import RNPickerSelect from '@react-native-picker/picker';
-import RNPickerSelect from 'react-native-picker-select';
 import Alert from 'react-native-awesome-alerts';
 
 import {Form} from '@unform/mobile';
@@ -33,23 +31,32 @@ const SignUp: React.FC = () => {
     const formRef = useRef<FormHandles>(null);
 
     const handleSignUp = async (data: SignUpFormData) => {
-        const params = [
-            data.name,
-            data.user,
-            data.password,
-            data.email,
-            data.phone
-        ]
+        const params = {
+            nome: data.name,
+            login: data.user,
+            senha: data.password,
+            celular: data.phone,
+            email: data.email
+        }
 
         console.log(params);
 
-        // const response = await api.post('/signup', params);
+        //verificar campos nulos
+        if(data.name === "" || data.user === "" || data.password === "" || data.email === "" || data.phone === ""){
+            console.log('campo null')
+            setShowAlert(true)
+            return;
+        }
 
-        // console.log(response);
+        //verificar LOGIN já existente
+        //TODO
+
+        const response = await api.post('/signup', params);
+        console.log(response.data.message);
         
-        // if(true) //response.status != 200
-        //     setShowAlert(true);
-        // else
+        if(response.data.status != 200)
+            setShowAlert(true);
+        else
             navigation.navigate('SuccessSignUp');
     };
 

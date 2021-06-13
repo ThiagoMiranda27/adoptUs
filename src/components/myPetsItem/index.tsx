@@ -3,9 +3,9 @@ import React from 'react';
 import {Container, Profile, Avatar, ProfileInfo, Name} from './styles';
 
 export interface Pet {
-    id: number;
-    nome: string;
-    link_foto: string;
+    ID: number;
+    NOME: string;
+    LINK_FOTO: string;
 }
 
 interface PetProps {
@@ -17,10 +17,10 @@ const MyPetsItem: React.FC<PetProps> = ({pet}) => {
     return(
         <Container>
             <Profile>
-                <Avatar source={{uri: pet.link_foto}} ></Avatar>
+                <Avatar source={{uri: pet.LINK_FOTO}} ></Avatar>
 
                 <ProfileInfo>
-                    <Name>{pet.nome}</Name>
+                    <Name>{pet.NOME}</Name>
                 </ProfileInfo>
             </Profile>
         </Container>

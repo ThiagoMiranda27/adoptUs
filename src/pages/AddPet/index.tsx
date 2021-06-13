@@ -11,48 +11,85 @@ import Alert from 'react-native-awesome-alerts';
 import InputWithoutIcon from '../../components/inputSemIcone';
 import Button from '../../components/button';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import api from '../../services/api';
+
 import {useNavigation} from '@react-navigation/native';
 
 import {Container, HeaderContainer, BorderlessButton,RadioButtonContainer, RadioButtonTitle, TextHeader, TopBar,RadioButtonText, PhotoBox, ViewRadioButton, PhotoView, PhotoText, PickerView} from './styles';
 
+interface AddPetFormData {
+    nome: string;
+    data_cadastro: string;
+    link_foto: string;
+    tipo_animal: string;
+    raca: string;
+    sexo: string;
+    porte: string;
+    vacinado: string;
+    castrado: string;
+    vermifugado: string;
+    contato: string;
+    biografia: string;
+}
+
+export type Photo = string | undefined;
+
 const AddPet: React.FC = () => {
     const [showAlert, setShowAlert] = useState(false);
     const formRef = useRef<FormHandles>(null)
-    const [petPhoto, setPetPhoto] = useState('');
+    const [petPhoto, setPetPhoto] = useState('' as Photo);
     const [checkedSexo, setCheckedSexo] = useState('macho');
     const [checkedVacinado, setCheckedVacinado] = useState('nao');
     const [checkedVermifugado, setCheckedVermifugado] = useState('nao');
     const [checkedCastrado, setCheckedCastrado] = useState('nao');
-    
-    // STRING DE UM CARACTER
-    // 0 - NAO | MACHO
-    // 1 - SIM | FEMEA
-    
-    //MUDAR VALOR DO STATE DOS CAMPOS
 
     const navigation = useNavigation();
 
-    const handleAddPet = useCallback((data: object) => {
-        console.log(data);
-        // console.log('data_cadastro:' + new Date())
-        console.log('sexo:' + checkedSexo)
-        console.log('vacinado:' + checkedVacinado)
-        console.log('castrado:' + checkedCastrado)
-        console.log('vermigfugado:' + checkedVermifugado)
-        //verificacao
-        //TODO
-        if(false)
+    const handleAddPet = useCallback(async (data: AddPetFormData) => {
+        let user_id = await AsyncStorage.getItem('@user_id');
+
+        const params = {
+            nome: data.nome,
+            data_castado: Date.now(),
+            link_foto: petPhoto,
+            tipo_animal: data.tipo_animal,
+            raca: data.raca,
+            sexo: checkedSexo,
+            porte: data.porte,
+            vacinado: checkedVacinado,
+            castrado: checkedCastrado,
+            vermifugado: checkedVermifugado,
+            contato: data.contato,
+            biografia: data.biografia,
+            id_dono: user_id
+        }
+
+        console.log(params);
+
+        if(data.nome === "" || data.tipo_animal === "" || data.raca === "" || data.sexo === "" || data.porte === "" || data.vacinado === ""
+            || data.castrado === "" || data.vermifugado === "" || data.contato === "" || data.biografia === "" || user_id === ""){
+            console.log('campo null')
             setShowAlert(true);
-        else
-        navigation.navigate('SuccessAdoption');
+            return;
+        }
+        else{
+            try{
+                api.post('/addpet', params)
+            }catch(err){
+                console.log(err)
+            }
+            
+            navigation.navigate('SuccessAdoption');
+        }
     }, []);
 
     const handleChoosePhoto = () => {
         launchImageLibrary({
             mediaType: 'photo',
         }, response => {
-            // setPetPhoto(response.uri);
-            console.log(response);
+            setPetPhoto(response.uri);
         })
     }
 
@@ -87,9 +124,8 @@ const AddPet: React.FC = () => {
                     </PhotoView>
 
                     <Form ref={formRef} onSubmit={handleAddPet}>
-                        {/* desde data_cadastro = DateTime.Now */}
-                        <InputWithoutIcon name="name" placeholder="Nome" />
-                        <InputWithoutIcon name="animal" placeholder="Animal" />
+                        <InputWithoutIcon name="nome" placeholder="Nome" />
+                        <InputWithoutIcon name="tipo_animal" placeholder="Animal" />
                         <InputWithoutIcon name="raca" placeholder="Raça" />
                         <RadioButtonContainer>
                             <RadioButtonTitle>Sexo</RadioButtonTitle>
@@ -176,13 +212,9 @@ const AddPet: React.FC = () => {
                                 }}
                             />
                         </RadioButtonContainer>
-                        <InputWithoutIcon name="contact" placeholder="Contado do(a) dono(a)" />
-                        <InputWithoutIcon name="description" placeholder="Descrição do pet" />
-                        {/* ID do dono (usuario) */}
+                        <InputWithoutIcon name="contato" placeholder="Contado do(a) dono(a)" />
+                        <InputWithoutIcon name="biografia" placeholder="Descrição do pet" />                    
 
-                        
-
-                        
                         <Button
                             onPress={()=>{
                                     formRef.current?.submitForm();
@@ -195,7 +227,7 @@ const AddPet: React.FC = () => {
                             show={showAlert}
                             showProgress={false}
                             title="Erro ao adicionar pet para adoção"
-                            message="Campo(s) incorreto(s)."
+                            message="Campo(s) inválido(s)."
                             closeOnTouchOutside={true}
                             closeOnHardwareBackPress={true}
                             showCancelButton={false}
@@ -211,76 +243,6 @@ const AddPet: React.FC = () => {
                         >
                         </Alert>
 
-
-                        {/* <PickerView>
-                            <Picker
-                                selectedValue="Selecione uma opção"
-                                style={{height: 60}}
-                                prompt='Animal'
-                            >
-                                <Picker.Item label="Animal" value="0" />
-                                <Picker.Item label="Cachorro" value="1" />
-                                <Picker.Item label="Gato" value="2" />
-                                
-                            </Picker>
-                        </PickerView> */}
-                        {/* <PickerView>
-                            <Picker
-                                selectedValue="Selecione uma opção"
-                                style={{height: 60}}
-                                prompt='Sexo'
-                            >
-                                <Picker.Item label="Sexo" value="0" />
-                                <Picker.Item label="Macho" value="1" />
-                                <Picker.Item label="Fêmea" value="2" />
-                            </Picker>
-                        </PickerView> */}
-                        {/* <PickerView>
-                            <Picker
-                                selectedValue="Selecione uma opção"
-                                style={{height: 60}}
-                                prompt='Porte'
-                            >
-                                <Picker.Item label="Porte" value="0" />
-                                <Picker.Item label="Pequeno" value="1" />
-                                <Picker.Item label="Médio" value="2" />
-                                <Picker.Item label="Grande" value="3" />
-                            </Picker>
-                        </PickerView> */}
-                        {/* <PickerView>
-                            <Picker
-                                selectedValue="Selecione uma opção"
-                                style={{height: 60}}
-                                prompt='Vacinado'
-                            >
-                                <Picker.Item label="Vacinado" value="0" />
-                                <Picker.Item label="Sim" value="1" />
-                                <Picker.Item label="Não" value="2" />
-                            </Picker>
-                        </PickerView> */}
-                        {/* <PickerView>
-                            <Picker
-                                selectedValue="Selecione uma opção"
-                                style={{height: 60}}
-                                prompt='Castrado'
-                            >
-                                <Picker.Item label="Castrado" value="0" />
-                                <Picker.Item label="Sim" value="1" />
-                                <Picker.Item label="Não" value="2" />
-                            </Picker>
-                        </PickerView> */}
-                        {/* <PickerView>
-                            <Picker
-                                selectedValue="Selecione uma opção"
-                                style={{height: 60}}
-                                prompt='Vermifugado'
-                            >
-                                <Picker.Item label="Vermifugado" value="0" enabled={true} />
-                                <Picker.Item label="Sim" value="1" />
-                                <Picker.Item label="Não" value="2" />
-                            </Picker>
-                        </PickerView> */}
-                        
                     </Form>
                     
                 </Container>

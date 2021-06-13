@@ -17,8 +17,9 @@ const Inicial: React.FC = () => {
 
     async function loadPets() {
         try {
-            const { data } = await api.get("/pets");
-            console.log(data)
+            const response = await api.get("/pets");
+            // console.log(response.data)
+            setPets(response.data)
           } catch (err) {
             console.error(err)
           }
@@ -48,10 +49,10 @@ const Inicial: React.FC = () => {
                 horizontal={true}
             >
                 
-                {pets.map((pet: Pet) => {
+                {pets.map((pet: Pet, index) => {
                     return (
                         <PetItem 
-                            key={pet.id}
+                            key={index}
                             pet={pet}
                         />
                     )
@@ -60,81 +61,6 @@ const Inicial: React.FC = () => {
             </ScrollView>
             </Container>
         </>
-
-
-        // <Container>
-        //     <Profile>
-        //         <Avatar source={{uri: 'https://avatars.githubusercontent.com/u/48134316?v=4'}} ></Avatar>
-
-        //         <ProfileInfo>
-        //             <Name>'name'</Name>
-        //             <Subject>Desde 'data_cadastro'</Subject>
-        //         </ProfileInfo>
-        //     </Profile>
-        //     <Bio>
-        //         'biografia'
-        //     </Bio>
-
-        //     <Footer>
-        //         <Button>
-        //             Entrar em contato
-        //         </Button>
-        //     </Footer>
-        // </Container>
-
-
-        // <>
-        // <KeyboardAvoidingView 
-        //     style={{flex: 1}}
-        //     behavior={Platform.OS == 'ios' ? 'padding' : undefined}
-        //     enabled
-        // >
-        //     <ScrollView
-        //         keyboardShouldPersistTaps='handled'
-        //     >
-        //             <Container style={{backgroundColor:'#235cba'}}>
-
-        //                 <Title>Informações do Pet</Title>
-                        
-        //                 {/* carousel */}
-        //                 <Carrosel>
-        //                 </Carrosel>
-        
-        //                 <TextoDescicao>Em adoção desde 19/03/2021</TextoDescicao>
-
-        //                 <View>
-        //                     <View style={{flexDirection:'row'}}>
-        //                         <Texto>Tipo: Cachorro</Texto>
-        //                         <Texto>Vacinado: Sim</Texto>
-        //                     </View>
-        //                     <View style={{flexDirection:'row'}}>
-        //                         <Texto>Raça: Vira-lata</Texto>
-        //                         <Texto>Castrado: Sim</Texto>
-        //                     </View>
-        //                     <View style={{flexDirection:'row'}}>
-        //                         <Texto>Sexo: Masculino</Texto>
-        //                         <Texto>Vermifugado: Não</Texto>
-        //                     </View>
-        //                     <View style={{flexDirection:'row'}}>
-        //                         <Texto>Porte: Médio</Texto>
-        //                     </View>
-        //                     <View style={{flexDirection:'row'}}>
-        //                         <TextoDescicao>Descrição: Animal muito dócil, conviveu muito em ambiente trancado.</TextoDescicao>
-        //                     </View>
-        //                 </View>
-
-        //                 <Button onPress={Contato}>Entrar em Contato</Button>
-
-        //             </Container>
-        //         </ScrollView>
-        //     </KeyboardAvoidingView>
-
-        //     <BackButton onPress={Voltar}>
-        //         <Icon name="arrow-left" size={40} color="#fff" />
-        //         <BackButtonText></BackButtonText>
-        //     </BackButton>
-
-        // </>
     );
 }
 

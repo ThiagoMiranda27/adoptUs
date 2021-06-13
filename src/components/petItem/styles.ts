@@ -54,6 +54,12 @@ export const TextBio = styled.Text`
     margin-bottom: 7px;
 `;
 
+export const TextBiografia = styled.Text`
+    font-size: 14px;
+    margin-bottom: 7px;
+    width: 280px;
+`;
+
 export const Footer = styled.View`
     color: #fafafc;
     padding: 24px;

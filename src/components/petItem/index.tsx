@@ -2,23 +2,23 @@ import React from 'react';
 
 import whatsAppIcon from '../../assets/whatsapp.png';
 
-import {Container, Profile, Avatar, ProfileInfo, Name, Subject, Bio, Footer, ContactButton, ButtonsContainer, ContactButtonText, TextBio} from './styles';
+import {Container, Profile, Avatar, ProfileInfo, Name, Subject, Bio, Footer, ContactButton, ButtonsContainer, ContactButtonText, TextBio, TextBiografia} from './styles';
 import { Image, Linking } from 'react-native';
 
 export interface Pet {
     id: number;
-    nome: string;
-    data_cadastro: string;
-    link_foto: string;
-    tipo: string;
-    vacinado: string;
-    raca: string;
-    castrado: string;
-    sexo: string;
-    vermifugado: string;
-    porte: string;
-    biografia: string;
-    contato: string;
+    NOME: string;
+    DATA_CADASTRO: string;
+    LINK_FOTO: string;
+    TIPO_ANIMAL: string;
+    VACINADO: string;
+    RACA: string;
+    CASTRADO: string;
+    SEXO: string;
+    VERMIFUGADO: string;
+    PORTE: string;
+    BIOGRAFIA: string;
+    CONTATO: string;
 }
 
 interface PetProps {
@@ -28,36 +28,42 @@ interface PetProps {
 const PetItem: React.FC<PetProps> = ({pet}) => {
 
     function handleLinkToWhatsapp(){
-        Linking.openURL(`whatsapp://send?phone=${pet.contato}`)
+        console.log('Chamou no WhatsApp!')
+        Linking.openURL(`whatsapp://send?phone=${pet.CONTATO}`)
     }
+
+    pet.VACINADO === "1" ? pet.VACINADO = "Sim" : pet.VACINADO = "Não"
+    pet.CASTRADO === "1" ? pet.CASTRADO = "Sim" : pet.CASTRADO = "Não"
+    pet.VERMIFUGADO === "1" ? pet.VERMIFUGADO = "Sim" : pet.VERMIFUGADO = "Não"
+    pet.SEXO === "1" ? pet.SEXO = "Fêmea" : pet.SEXO = "Macho"
 
     return(
         <Container>
             <Profile>
-                <Avatar source={{uri: pet.link_foto}} ></Avatar>
+                <Avatar source={{uri: pet.LINK_FOTO}} ></Avatar>
 
                 <ProfileInfo>
-                    <Name>{pet.nome}</Name>
-                    <Subject>Desde {pet.data_cadastro}</Subject>
+                    <Name>{pet.NOME}</Name>
+                    {/* <Subject>Desde {pet.DATA_CADASTRO}</Subject> */}
                 </ProfileInfo>
             </Profile>
             <Bio>
-                <TextBio>Tipo: {pet.tipo}</TextBio>
-                <TextBio>Vacinado: {pet.vacinado}</TextBio>
+                <TextBio>Tipo: {pet.TIPO_ANIMAL}</TextBio>
+                <TextBio>Vacinado: {pet.VACINADO}</TextBio>
             </Bio>
             <Bio>
-                <TextBio>Raça: {pet.raca}</TextBio>
-                <TextBio>Castrado: {pet.castrado}</TextBio>
+                <TextBio>Raça: {pet.RACA}</TextBio>
+                <TextBio>Castrado: {pet.CASTRADO}</TextBio>
             </Bio>
             <Bio>
-                <TextBio>Sexo: {pet.sexo}</TextBio>
-                <TextBio>Vermifugado: {pet.vermifugado}</TextBio>
+                <TextBio>Sexo: {pet.SEXO}</TextBio>
+                <TextBio>Vermifugado: {pet.VERMIFUGADO}</TextBio>
             </Bio>
             <Bio>
-                <TextBio>Porte: {pet.porte}</TextBio>
+                <TextBio>Porte: {pet.PORTE}</TextBio>
             </Bio>
             <Bio>
-                <TextBio>Biografia: {pet.biografia}</TextBio>
+                <TextBiografia>Biografia: {pet.BIOGRAFIA}</TextBiografia>
             </Bio>
 
             <Footer>
