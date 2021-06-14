@@ -1,5 +1,5 @@
 import React, {useRef, useCallback, useState} from 'react';
-import {Image, View, KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
+import {View, KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import Alert from 'react-native-awesome-alerts';
@@ -49,8 +49,10 @@ const SignUp: React.FC = () => {
         }
 
         //verificar LOGIN já existente
-        //TODO
-
+        // {
+                //TODO
+        // }
+        
         const response = await api.post('/signup', params);
         console.log(response.data.message);
         
@@ -85,14 +87,7 @@ const SignUp: React.FC = () => {
                             <Input name="password" icon="lock" placeholder="Senha" password={true}/>
                             <Input name="email" icon="mail" placeholder="E-mail"/>
                             <Input name="phone" icon="phone" placeholder="Celular"/>
-
-                            {/* <Input name="date" icon="calendar" placeholder="Data de nascimento"/> */}
-
                             
-
-                            {/* estado
-                            cidade */}
-
                             <Button onPress={() => { 
                                 formRef.current?.submitForm();
                             }

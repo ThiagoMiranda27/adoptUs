@@ -1,6 +1,5 @@
 import React, {useRef, useCallback, useState} from 'react';
 import {KeyboardAvoidingView, Platform, ScrollView, Text, TouchableOpacity, View} from 'react-native';
-import {Picker} from '@react-native-picker/picker';
 import {RadioButton} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Feather';
 import {launchImageLibrary} from 'react-native-image-picker';

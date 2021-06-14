@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ScrollView, Text, View} from 'react-native';
+import {ScrollView, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import {useNavigation, useFocusEffect} from '@react-navigation/native';

@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Image, View, KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -45,8 +45,6 @@ const SignIn: React.FC = () => {
             login: data.user,
             senha: data.password
         }
-
-        // console.log(params);
 
         // verificar campos nulos
         if(data.user === "" || data.password === ""){

@@ -23,9 +23,6 @@ const SuccessAdoption: React.FC = () => {
 
                 <Button onPress={() => {navigation.navigate('MyPets')}}>Ok</Button>
             </Container>
-
-            
-            
         </>
     );
 }

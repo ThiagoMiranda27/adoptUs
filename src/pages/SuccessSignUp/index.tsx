@@ -23,9 +23,6 @@ const SuccessSignUp: React.FC = () => {
 
                 <Button onPress={() => {navigation.navigate('SignIn')}}>Ok</Button>
             </Container>
-
-            
-            
         </>
     );
 }
